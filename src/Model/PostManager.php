@@ -14,17 +14,22 @@
         public function getPosts(int $limit = 6): array|false|null
         {
             $req = $this->dbConnect()->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT 0,:limit");
-            $req->bindValue(":limit", $limit, PDO::PARAM_INT);
+            $req->bindParam(":limit", $limit, PDO::PARAM_INT);
             $req->execute();
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             $req->closeCursor();
             return $data;
         }
 
-        public function getPost(int $id): array|false|null
+        /**
+         * Permet d'obtenir un post en particulier avec l'id de son identifiant
+         * @param int $id
+         * @return object|false|null
+         */
+        public function getPost(int $id): object|false|null
         {
             $req = $this->dbConnect()->prepare("SELECT * FROM posts WHERE id = :id");
-            $req->bindValue(":id", $id, PDO::PARAM_INT);
+            $req->bindParam(":id", $id, PDO::PARAM_INT);
             $req->execute();
             $data = $req->fetch(PDO::FETCH_OBJ);
 
