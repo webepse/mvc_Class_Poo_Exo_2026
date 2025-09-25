@@ -2,6 +2,7 @@
     namespace App\Model;
 
     use App\Model\Manager;
+    use App\Model\Tools\Post;
     use PDO;
 
     class PostManager extends Manager{
@@ -34,6 +35,18 @@
             $data = $req->fetch(PDO::FETCH_OBJ);
 
             return $data;
+        }
+
+        /**
+         * Permet de récup tous les posts
+         *
+         * @return array|null|false
+         */
+        public function getAllPost(): array|false|null
+        {
+            $req = $this->dbConnect()->query("SELECT * FROM posts ORDER BY id DESC");
+            // Post::class retourne le nom de la classe avec son namespace => 'App\Model\Tools\Post => ne pas oublier le use pour Post!'
+            return $req->fetchAll(PDO::FETCH_CLASS, Post::class);
         }
 
     }
