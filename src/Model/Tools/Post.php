@@ -74,8 +74,6 @@ class Post{
         }
         $dateTime->setTimezone(new \DateTimeZone('Europe/Brussels'));
         $now = new DateTime('now',  new \DateTimeZone('Europe/Brussels'));
-       
-
 
         $diff = $now->diff($dateTime);
 

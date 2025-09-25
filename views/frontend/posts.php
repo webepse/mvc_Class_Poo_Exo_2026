@@ -3,10 +3,6 @@
 <?php ob_start(); ?>
 <div class="container-fluid">
     <h1>Les posts</h1>
-    <?php
-        $date = new \DateTime('now', new \DateTimeZone('Europe/Brussels'));
-        echo $date->format("d-m-Y H:i:s");
-    ?>
     <div class="row">
         <?php foreach($posts as $post): ?>
             <div class="col-md-4 my-3">
@@ -15,7 +11,7 @@
                         <h5><?= $post->title; ?></h5>
                         <h6><?= $post->getDateFormat(); ?></h6>
                         <h6><?= $post->timeAgo() ?></h6>
-                        <p><?= $post->getExtrait(); ?></p>
+                        <div><?= $post->getExtrait(); ?></div>
                     </div>
                 </div>
             </div>

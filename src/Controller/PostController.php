@@ -16,4 +16,18 @@ use App\Model\PostManager;
         $posts = $postManager->getAllPost();
         require "views/frontend/posts.php";
     }
+
+    /**
+     * Permet d'afficher la page d'un post en particulier avec son id
+     *
+     * @param integer $id
+     * @return void
+     */
+    public static function show(int $id): void
+    {
+        $postManager = new PostManager();
+        $post = $postManager->getPost($id);
+        require "views/frontend/postShow.php";
+    }
+
  }

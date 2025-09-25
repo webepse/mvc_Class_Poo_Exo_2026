@@ -18,8 +18,17 @@
             }elseif($_GET['action']=="posts")
             {
                 PostController::index();
+            }elseif($_GET['action']=="post")
+            {
+                if(isset($_GET['id']) && is_numeric($_GET['id']))
+                {
+                    $id = htmlspecialchars($_GET['id']);
+                    // attention risque d'erreur
+                    PostController::show($id);
+                }else{
+                    // erreur 404
+                }
             }
-
         }else{
             // erreur 404
         }

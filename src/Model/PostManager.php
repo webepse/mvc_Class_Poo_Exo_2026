@@ -17,7 +17,7 @@
             $req = $this->dbConnect()->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT 0,:limit");
             $req->bindParam(":limit", $limit, PDO::PARAM_INT);
             $req->execute();
-            $data = $req->fetchAll(PDO::FETCH_OBJ);
+            $data = $req->fetchAll(PDO::FETCH_CLASS, Post::class);
             $req->closeCursor();
             return $data;
         }
@@ -32,7 +32,9 @@
             $req = $this->dbConnect()->prepare("SELECT * FROM posts WHERE id = :id");
             $req->bindParam(":id", $id, PDO::PARAM_INT);
             $req->execute();
-            $data = $req->fetch(PDO::FETCH_OBJ);
+            //$data = $req->fetch(PDO::FETCH_OBJ);
+            $req->setFetchMode(PDO::FETCH_CLASS, Post::class);
+            $data = $req->fetch();
 
             return $data;
         }

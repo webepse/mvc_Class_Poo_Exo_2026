@@ -11,6 +11,7 @@
     <title>Blog - <?= $title ?></title>
 </head>
 <body>
+    <?php require "partials/nav.php"; ?>
     <?= $content ?>
 </body>
 </html>
