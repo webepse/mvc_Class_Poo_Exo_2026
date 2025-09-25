@@ -3,6 +3,7 @@
 namespace App\Model\Tools;
 
 use DateTime;
+use DateTimeZone;
 
 class Post{
 
@@ -52,6 +53,7 @@ class Post{
         {
             $dateTime = DateTime::createFromFormat('Y-m-d', $this->creation_date);
         }
+        $dateTime->setTimezone(new \DateTimeZone('Europe/Brussels'));
 
         if($dateTime){
             return $dateTime->format('d/m/Y H:i');
@@ -70,8 +72,10 @@ class Post{
         {
             $dateTime = DateTime::createFromFormat('Y-m-d', $this->creation_date);
         }
+        $dateTime->setTimezone(new \DateTimeZone('Europe/Brussels'));
+        $now = new DateTime('now',  new \DateTimeZone('Europe/Brussels'));
+       
 
-        $now = new DateTime();
 
         $diff = $now->diff($dateTime);
 
