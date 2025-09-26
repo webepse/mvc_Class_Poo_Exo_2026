@@ -32,7 +32,7 @@ use Exception;
         {
             require "views/frontend/postShow.php";
         }else{
-          throw new Exception("L'id ne correspond à un objet de la bdd",404);
+            throw new Exception("L'id ne correspond à un objet de la bdd",404);
         }
     }
 
