@@ -2,6 +2,7 @@
  namespace App\Controller;
 
 use App\Model\PostManager;
+use Exception;
 
  class PostController{
 
@@ -27,7 +28,12 @@ use App\Model\PostManager;
     {
         $postManager = new PostManager();
         $post = $postManager->getPost($id);
-        require "views/frontend/postShow.php";
+        if($post)
+        {
+            require "views/frontend/postShow.php";
+        }else{
+          throw new Exception("L'id ne correspond à un objet de la bdd",404);
+        }
     }
 
  }
