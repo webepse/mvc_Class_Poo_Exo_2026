@@ -33,6 +33,12 @@ use Exception;
                     }
                 }elseif($_GET['action']=="postcomment")
                 {
+                    // Router : index.php => gèrer la route
+                    // Controller (cerveau) : src/Controller/PostController.php => intéragir avec la bdd (model) et envoyer vers la bonne vue
+                        // src/Model/PostManager.php pour la gestion du post (vérifier / afficher)
+                        // src/Model/CommentManager.php pour la gestion du commentaire (afficher / envoyer)
+                    // la vue (require) => views/frontend/postShow.php
+
                     if(isset($_GET['id']) && is_numeric($_GET['id']))
                     {
                         $id = htmlspecialchars($_GET['id']);

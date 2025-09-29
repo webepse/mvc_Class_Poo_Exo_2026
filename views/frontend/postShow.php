@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><?= $comment->author ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $comment->mydate ?></h6>
-                        <p class="card-text"><?= $comment->comment ?></p>
+                        <p class="card-text"><?= nl2br($comment->comment) ?></p>
                     </div>
                 </div>
                 <?php endforeach; ?>

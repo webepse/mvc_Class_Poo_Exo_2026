@@ -61,11 +61,12 @@ use Exception;
                 $comment = htmlspecialchars($_POST['comment']);
                 // req d'insertion au model pour ajouter le commentaire à la BDD
                 $commentManager->post($postId, $author, $comment);
+                // redirection pour éviter bug au rechargement de la page (ref formulaire)
                 header("LOCATION:index.php?action=post&id=".$postId);
                 exit();
             }else{
                 // le formulaire n'est pas bon
-                // besoin des commentaires pour l'affichage de la page
+                // besoin des commentaires pour l'affichage de la page (au nom de l'ergonomie)
                 $comments = $commentManager->getComments($postId);
                 $error = "Veuillez remplir tous les champs correctement";
                 // on ajoute l'erreur à la vue postShow
