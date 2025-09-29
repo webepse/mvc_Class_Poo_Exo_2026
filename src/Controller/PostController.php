@@ -1,6 +1,7 @@
 <?php
  namespace App\Controller;
 
+use App\Model\CommentManager;
 use App\Model\PostManager;
 use Exception;
 
@@ -28,6 +29,8 @@ use Exception;
     {
         $postManager = new PostManager();
         $post = $postManager->getPost($id);
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getComments($id);
         if($post)
         {
             require "views/frontend/postShow.php";
