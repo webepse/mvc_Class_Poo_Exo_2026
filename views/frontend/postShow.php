@@ -25,6 +25,26 @@
             <?php else: ?>
                 <strong>Il n'y a pas encore de commentaire sur ce post</strong>
             <?php endif; ?>
+
+        <div class="col-md-4">
+            <h4>Ajouter un commentaire</h4>
+            <?php if(isset($error)): ?>
+                <div class="alert alert-danger"><?= $error ?></div>
+            <?php endif; ?>
+            <form action="index.php?action=postcomment&id=<?= $post->id ?>" method="post">
+                <div class="form-group">
+                    <label for="author">Auteur</label>
+                    <input type="text" class="form-control" id="author" name="author" placeholder="Auteur">
+                </div>
+                <div class="form-group">
+                    <label for="comment">Commentaire</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Envoyer" class="btn btn-primary my-3">
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

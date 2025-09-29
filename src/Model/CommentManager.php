@@ -18,5 +18,21 @@ class CommentManager extends Manager{
         return $req->fetchAll(PDO::FETCH_OBJ);
     }
 
-    
+    /**
+     * Permet d'ajouter un commentaire à la base de données
+     * @param int $idPost
+     * @param string $author
+     * @param string $content
+     * @return bool
+     */
+    public function post(int $idPost, string $author, string $content): bool
+    {
+        $req = $this->dbConnect()->prepare("INSERT INTO comments (post_id, author, comment, comment_date) VALUES (:idPost, :author, :content, NOW())");
+        $req->bindParam(":idPost", $idPost, PDO::PARAM_INT);
+        $req->bindParam(":author", $author, PDO::PARAM_STR);
+        $req->bindParam(":content", $content, PDO::PARAM_STR);
+        $req->execute();
+        return true;
+    }
+
 }

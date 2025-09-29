@@ -9,7 +9,7 @@ use Exception;
     require "src/Autoloader.php";
     Autoloader::register();
 
-    $tabMenu = ['accueil','posts','post'];
+    $tabMenu = ['accueil','posts','post','postcomment'];
 
     try{
         if(isset($_GET['action']))
@@ -31,7 +31,18 @@ use Exception;
                         // erreur 404
                         throw new Exception("L'identifiant doit être numérique ou n'est pas présent",404);
                     }
+                }elseif($_GET['action']=="postcomment")
+                {
+                    if(isset($_GET['id']) && is_numeric($_GET['id']))
+                    {
+                        $id = htmlspecialchars($_GET['id']);
+                        PostController::postComment($id);
+                    }else{
+                        // erreur 404
+                        throw new Exception("L'identifiant doit être numérique ou n'est pas présent",404);
+                    }
                 }
+
             }else{
                 // erreur 404
                   throw new Exception("Action introuvable",404);

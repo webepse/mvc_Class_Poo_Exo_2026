@@ -39,4 +39,43 @@ use Exception;
         }
     }
 
+     /**
+      * Permet d'ajouter un commentaire à un post
+      * @param int $postId
+      * @return void
+      */
+    public static function postComment(int $postId): void
+    {
+        // instance des model dont nous avons besoin
+        $postManager = new PostManager();
+        $commentManager = new CommentManager();
+        // req au model pour savoir si le post existe
+        $post = $postManager->getPost($postId);
+        if($post)
+        {
+            // vérification du formulaire
+            if((isset($_POST['author']) && isset($_POST['comment'])) && (!empty($_POST['author']) && !empty($_POST['comment'])))
+            {
+                // protection des données
+                $author = htmlspecialchars($_POST['author']);
+                $comment = htmlspecialchars($_POST['comment']);
+                // req d'insertion au model pour ajouter le commentaire à la BDD
+                $commentManager->post($postId, $author, $comment);
+                header("LOCATION:index.php?action=post&id=".$postId);
+                exit();
+            }else{
+                // le formulaire n'est pas bon
+                // besoin des commentaires pour l'affichage de la page
+                $comments = $commentManager->getComments($postId);
+                $error = "Veuillez remplir tous les champs correctement";
+                // on ajoute l'erreur à la vue postShow
+                require "views/frontend/postShow.php";
+            }
+
+        }else{
+            // le post n'existe pas
+            throw new Exception("Le post n'existe pas");
+        }
+    }
+
  }
